@@ -1,6 +1,6 @@
 #Docker Work na BSDK
 
-name: Ultroid Workflow
+name: Kanjeng Workflow
 
 on:
     push:
@@ -24,20 +24,20 @@ jobs:
        - name: cloning repo
          continue-on-error: true
          run: |
-           git clone https://${{ secrets.GitHubName }}:${{ secrets.GH_TOKEN }}@${{ secrets.CREDS }} ultroid
+           git clone https://${{ secrets.GitHubName }}:${{ secrets.GH_TOKEN }}@${{ secrets.CREDS }} kanjeng
        - name: Running Ultroid
          timeout-minutes: 350
          continue-on-error: true
          run: |
            cd ultroid
-           wget https://raw.githubusercontent.com/TeamUltroid/Ultroid/main/Dockerfile
+           wget https://raw.githubusercontent.com/AftahBagas/Kanjeng/main/Dockerfile
            echo "CMD bash resources/startup/startup.sh" >> Dockerfile
-           docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t ultroid
-           docker run --privileged --env-file .env --rm -i ultroid
+           docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t kanjeng
+           docker run --privileged --env-file .env --rm -i kanjeng
        - name: Loop workflow
          continue-on-error: true
          run: |
-              git clone https://github.com/ProgrammingError/ultroid-wf-example loop
+              git clone https://github.com/ProgrammingError/kanjeng-wf-example loop
               cd loop || exit 1
               echo $(date -u +%T%P) >> loop.txt
               git add loop.txt
